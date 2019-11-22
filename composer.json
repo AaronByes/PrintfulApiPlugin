@@ -1,0 +1,6 @@
+{
+    "require": {
+        "printful/php-api-sdk": "^2.2",
+        "automattic/woocommerce": "^3.0"
+    }
+}

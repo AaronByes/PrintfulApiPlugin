@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>resizable demo</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+    #caja { width: 300px; height: 300px; 
+      display:inline-block;
+    }
+    #contenedor{
+      position: static;
+    }
+  #resizable {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+}	</style>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+<div id="contenedor">
+   <div class="caja" id="caja">
+      <img id="resizable" src="img/icon.png"></img>
+  </div>
+  <h3>hola</h3>
+</div>
+<input type="button" onclick="clase()" value="Mostrar tamaño">
+
+<script>
+  $(function(){
+    $("#caja").draggable({
+      containment: "#contenedor",
+      scroll: false
+});
+$("#resizable").resizable({
+  containment: "#caja"
+});
+  });
+
+function clase(){
+  alert ($("#resizable").height() );
+  alert ($("#resizable").width() );
+}
+</script>
+ 
+</body>
+</html>
