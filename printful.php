@@ -313,6 +313,8 @@ function writeToLog($idWoocommerce)
     }
 
 }
+
+//Recoger el ultimo producto creado para obtener su id
 function ultimoProducto()
 {
     $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
