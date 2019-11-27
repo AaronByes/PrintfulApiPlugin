@@ -81,36 +81,60 @@ if (isset($_POST['but_submit'])) {
                     <label for="camiseta"><img src="../wp-content/plugins/PrintfulApiPlugin/img/camisetas.jpg" alt="camisetas" /></label>
                     </td>
         </td>
+        </tr>
         </table>
     </tr>
     <tr>
-        <!-- <td>
-            <label for="tipo_producto">Tipo de producto: </label>
-            <select name="tipo_producto" id="tipo_producto" onchange="checkOption()" style="width: 50%">
-                <option name="radio" value="elige_producto">Elige tu producto</option>
-                <option name="radio" value="poster">Poster</option>
-                <option name="radio" value="lienzo">Lienzo</option>
-                </select>           
-        </td>
-         -->
         <td>
-            <select name="posters" id="posters" style="display: none;" onchange="">
-                <option name="radio_poster" value="elige_tamano">Elige tu tamaño</option>
-                <option name="radio_poster" value="21x30:8947" id="8947">21x30</option>
-                <option name="radio_poster" value="30x40:8948" id="8948">30x40</option>
-                <option name="radio_poster" value="50x70:8952" id="8952">50x70</option>
-                <option name="radio_poster" value="61x91:8953" id="8953">61x91</option>
-                <option name="radio_poster" value="70x100:8954" id="8954">70x100</option>
-            </select>
-            <select name="lienzos" id="lienzos" style="display: none;">
-                <option name="radio_lienzo" value="elige_tamano">Elige tu tamaño</option>
-                <option name="radio_lienzo" value="16x20:6" id="6">16x20</option>
-                <option name="radio_lienzo" value="18x24:7" id="7">18x24</option>
-                <option name="radio_lienzo" value="24x36:825" id="825">24x36</option>
-                <option name="radio_lienzo" value="16x16:824" id="824">16x16</option>
-                <option name="radio_lienzo" value="12x16:5" id="5">12x16</option>
-                <option name="radio_lienzo" value="12x12:823" id="823">12x12</option>
-            </select>
+        <table  id="posters" style="display: none;">
+            <tr>
+            <th>21x30</th>
+            <th>30x40</th>
+            <th>50x70</th>
+            <th>61x91</th>
+            <th>70x100</th>
+            </tr>
+            <tr>
+                <td>
+                    <img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/21x30.jpg" id="21x30:8947" value="21x30:8947" alt="poster21x30"/>
+                    </td>
+                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/30x40.jpg" value="61x91:8953" alt="poster30x40" />
+                    </td>
+                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/50x70.jpg"   value="30x40:8948" alt="poster50x70" />
+                    </td>
+                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/61x91.jpg" alt="poster61x91" value="61x91:8953" />
+                    </td>
+                    <td><img class="posters"  src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/70x100.jpg" alt="poster70x100" value="70x100:8954" >
+                    </td>
+                </td>
+                <input type="text" name="posters" id="posterSelected" style="display: none;">
+        </table>
+        <table  id="lienzos" style="display: none;">
+            <tr>
+            <th>12x12</th>
+            <th>12x16</th>
+            <th>16x16</th>
+            <th>24x36</th>
+            <th>18x24</th>
+            <th>16x20</th>
+            </tr>
+            <tr>
+                <td>
+                    <img class="lienzos" src="../wp-content/plugins/PrintfulApiPlugin/img/Lienzos/12x12.jpg"  value="12x12:823" alt="lienzo12x12"/>
+                    </td>
+                    <td><img class="lienzos" src="../wp-content/plugins/PrintfulApiPlugin/img/Lienzos/12x16.jpg" value="12x16:5" alt="lienzo12x16" />
+                    </td>
+                    <td><img class="lienzos" src="../wp-content/plugins/PrintfulApiPlugin/img/Lienzos/16x16.jpg"   value="16x16:824" alt="lienzo16x16" />
+                    </td>
+                    <td><img class="lienzos" src="../wp-content/plugins/PrintfulApiPlugin/img/Lienzos/24x36.jpg" value="24x36:825" alt="lienzo24x36"  />
+                    </td>
+                    <td><img class="lienzos"  src="../wp-content/plugins/PrintfulApiPlugin/img/Lienzos/18x24.jpg" value="18x24:7" alt="lienzo18x24"  >
+                    </td>
+                    <td><img class="lienzos"  src="../wp-content/plugins/PrintfulApiPlugin/img/Lienzos/16x20.jpg"  value="16x20:6" alt="lienzo16x20" >
+                    </td>
+                </td>
+                <input type="text" name="lienzos" id="lienzoSelected" style="display: none;">
+        </table>
         </td>
     </tr>
     <tr>
@@ -129,9 +153,6 @@ if (isset($_POST['but_submit'])) {
     <tr>
         <td><input type='file' name='file' id='file'></td>
         <td><div id="contenedor"><img  class="ui-widget-content" id="img-preview" width="300" height="300" style="display: none;"/></div></td>
-    </tr>
-    <tr>
-        <td><div id="canvas"></div></td>
     </tr>
     <tr>
       <td><input type='submit' name='but_submit' class="button button-primary" value='Previsualizar'></td>
