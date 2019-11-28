@@ -1,11 +1,9 @@
 .lienzos{
     cursor: pointer;
-    height: 200px;
     width: 200px;
 }
 .posters{
     cursor: pointer;
-    height: 200px;
     width: 200px;
 }
 .table-productos  {
@@ -83,4 +81,8 @@ label {
     }
 .radio{
     border: 1px solid;
+}
+
+#myCanvas {
+    background-color: white;
 }

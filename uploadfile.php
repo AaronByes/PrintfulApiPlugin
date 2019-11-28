@@ -155,6 +155,9 @@ if (isset($_POST['but_submit'])) {
         <td><div id="contenedor"><img  class="ui-widget-content" id="img-preview" width="300" height="300" style="display: none;"/></div></td>
     </tr>
     <tr>
+        <td><div id="canvas"></div></td>
+    </tr>
+    <tr>
       <td><input type='submit' name='but_submit' class="button button-primary" value='Previsualizar'></td>
     </tr>
   </table>

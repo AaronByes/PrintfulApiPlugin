@@ -200,10 +200,12 @@ function generateMockup($id_product, $variant_id, $area_width, $area_height, $im
                     foreach($images as $image){                        
                      echo '<div><img src=' . $image . ' id="img-preview"></div>';}
                      echo '
+                    <form method="post" action="" name="previewform" id="previewform">
                     <div style="text-align: center; margin-bottom: 1em;">
                         <input type="submit" id="crear" onclick="self.parent.tb_remove();" name="but_modificar" class="button button-primary btn-aceptar" value="CREAR PRODUCTO">
                         <input type="submit" onclick="borrarPost('. $post_id .','. ultimoProducto() .')" id="BorrarProducto" name="but_aceptar" class="button button-primary btn-modificar" value="BORRAR PRODUCTO">
                     </div>
+                    </form>
             </div>
             <a href="#TB_inline?&width=600&height=550&inlineId=my-content-id" class="thickbox button button-primary" style="margin-top: 1em;">Previsualizar</a>';
         //echo "Mockup creado correctamente";
@@ -293,15 +295,16 @@ function writeToLog($idWoocommerce)
 {
     $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
     $pf = new PrintfulApiClient($apiKey);
-    
-        $products = $pf->get('store/products');        
-        foreach ($products as $key => $value) {
-            foreach ($value as $llave => $valor) {
-                if ($llave == "id") {
-                    $idPrintful = $valor;                    
-                }
-            }
+    $products = $pf->get('store/products');  
+    $reverse_products = array_reverse($products);
+
+    foreach ($reverse_products as $key => $value) {
+        foreach ($value as $llave => $valor) {
+            if ($llave == "external_id") {
+                $idPrintful = $valor;
+            } 
         }
+    }
     echo "conexion: [ { idWoocommerce: " . $idWoocommerce ." /n " . "idPrintful: " . $idPrintful . " },]";
     $path = dirname(__FILE__) . '/productos1.json';
     $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -335,21 +338,24 @@ function url_exists( $url = NULL ){
     }
 
 }
+
+//Recoger el ultimo producto creado para obtener su id
 function ultimoProducto()
 {
     $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
     $pf = new PrintfulApiClient($apiKey);
-    
-        $products = $pf->get('store/products');        
-        foreach ($products as $key => $value) {
-            foreach ($value as $llave => $valor) {
-                if ($llave == "id") {
-                    $idPrintful = $valor;                    
-                }
+    $products = $pf->get('store/products');
+    $reverse_products = array_reverse($products);
+
+    foreach ($reverse_products as $key => $value) {
+        foreach ($value as $llave => $valor) {
+            if ($llave == "external_id") {
+                $idPrintful = $valor;
             }
         }
-        return $idPrintful;
     }
+    return "'" . $idPrintful . "'";
+}
 
 //Establecer la imagen del producto como imagen principal
 function generate_featured_image( $image_url, $post_id  ){
