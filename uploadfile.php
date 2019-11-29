@@ -96,15 +96,15 @@ if (isset($_POST['but_submit'])) {
             </tr>
             <tr>
                 <td>
-                    <img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/21x30.jpg" id="21x30:8947" value="21x30:8947" alt="poster21x30"/>
+                    <img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/21x30.jpg" value="21x30:8947" alt="poster21x30"/>
                     </td>
-                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/30x40.jpg" value="61x91:8953" alt="poster30x40" />
+                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/30x40.jpg" value="30x40:8948" alt="poster30x40" />
                     </td>
-                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/50x70.jpg"   value="30x40:8948" alt="poster50x70" />
+                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/50x70.jpg" value="50x70:8952" alt="poster50x70" />
                     </td>
-                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/61x91.jpg" alt="poster61x91" value="61x91:8953" />
+                    <td><img class="posters" src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/61x91.jpg" value="61x91:8953" alt="poster61x91" />
                     </td>
-                    <td><img class="posters"  src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/70x100.jpg" alt="poster70x100" value="70x100:8954" >
+                    <td><img class="posters"  src="../wp-content/plugins/PrintfulApiPlugin/img/Posters/70x100.jpg" value="70x100:8954" alt="poster70x100" >
                     </td>
                 </td>
                 <input type="text" name="posters" id="posterSelected" style="display: none;">

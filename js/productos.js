@@ -47,6 +47,7 @@ jQuery("input[name='productos']").click(function () {
         jQuery("#minimo").val(" ");
         jQuery("#lienzos").attr(" ");
         jQuery("#tipo_poster").addClass('active');
+        jQuery('#canvas').html('');
     }
 
     if (Seleccion == 'lienzo') {
@@ -55,10 +56,12 @@ jQuery("input[name='productos']").click(function () {
         jQuery("#minimo").val('');
         jQuery("#posters").attr(" ");
         jQuery("#tipo_lienzo").addClass('active');
+        jQuery('#canvas').html('');
     }
 
     if (Seleccion == 'camiseta') {
         jQuery("#tipo_camiseta").addClass('active');
+        jQuery('#canvas').html('');
     }
 });
 jQuery(document).ready(function () {
@@ -295,7 +298,12 @@ jQuery(".posters").click(function () {
     d.type = "text/javascript";
     document.body.appendChild(d);
     jQuery("#posterSelected").val(x);
-
+    var producto_split = x.split(":");
+    var producto_size = producto_split[0].split("x");
+    var producto_width = parseInt(producto_size[0]);
+    var producto_height = parseInt(producto_size[1]);
+    var width_pixels = (producto_width*37.79)/4;
+    var height_pixels = (producto_height*37.79)/4;
 
     //Crear canvas con el tamaño del lienzo al seleccionarlo
     jQuery('#canvas').html('');
@@ -303,8 +311,8 @@ jQuery(".posters").click(function () {
         'class': 'canvasProducto',
         id: 'myCanvas'
     }).prop({
-        width: 500,
-        height: 500
+        width: width_pixels,
+        height: height_pixels
     });
     jQuery('#canvas').append(newCanvas);
 });
@@ -319,6 +327,12 @@ jQuery(".lienzos").click(function () {
     d.type = "text/javascript";
     document.body.appendChild(d);
     jQuery("#lienzoSelected").val(x);
+    var producto_split = x.split(":");
+    var producto_size = producto_split[0].split("x");
+    var producto_width = parseInt(producto_size[0]);
+    var producto_height = parseInt(producto_size[1]);
+    var width_pixels = (producto_width*300)/12;
+    var height_pixels = (producto_height*300)/12;
 
     //Crear canvas con el tamaño del lienzo al seleccionarlo
     jQuery('#canvas').html('');
@@ -326,8 +340,8 @@ jQuery(".lienzos").click(function () {
         'class': 'canvasProducto',
         id: 'myCanvas'
     }).prop({
-        width: 500,
-        height: 500
+        width: width_pixels,
+        height: height_pixels
     });
     jQuery('#canvas').append(newCanvas);
 });
