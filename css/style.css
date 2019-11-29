@@ -86,3 +86,7 @@ label {
 #myCanvas {
     background-color: white;
 }
+
+img.active { 
+    border: 2px solid red;
+}

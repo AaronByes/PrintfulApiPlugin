@@ -92,13 +92,13 @@ function findAreaWidthHeight($printfileid, $id, $variant_id, $imageWidth, $image
                         if($key_printfiles_2 == "width" && $isWidth) {
                             $isWidth = false;
                             $area_width = $value_printfiles_2;
-                            echo "El width es: ". $value_printfiles_2 . ". " ;
+                            //echo "El width es: ". $value_printfiles_2 . ". " ;
                         }
 
                         if($key_printfiles_2 == "height" && $isHeight) {
                             $isHeight = false;
                             $area_height = $value_printfiles_2;
-                            echo "El height es: " . $value_printfiles_2 . ". ";
+                            //echo "El height es: " . $value_printfiles_2 . ". ";
                         }
                 }
             }
@@ -200,12 +200,12 @@ function generateMockup($id_product, $variant_id, $area_width, $area_height, $im
                     foreach($images as $image){                        
                      echo '<div><img src=' . $image . ' id="img-preview"></div>';}
                      echo '
-                    <form method="post" action="" name="previewform" id="previewform">
+                    
                     <div style="text-align: center; margin-bottom: 1em;">
                         <input type="submit" id="crear" onclick="self.parent.tb_remove();" name="but_modificar" class="button button-primary btn-aceptar" value="CREAR PRODUCTO">
                         <input type="submit" onclick="borrarPost('. $post_id .','. ultimoProducto() .')" id="BorrarProducto" name="but_aceptar" class="button button-primary btn-modificar" value="BORRAR PRODUCTO">
                     </div>
-                    </form>
+                    
             </div>
             <a href="#TB_inline?&width=600&height=550&inlineId=my-content-id" class="thickbox button button-primary" style="margin-top: 1em;">Previsualizar</a>';
         //echo "Mockup creado correctamente";
@@ -305,7 +305,7 @@ function writeToLog($idWoocommerce)
             } 
         }
     }
-    echo "conexion: [ { idWoocommerce: " . $idWoocommerce ." /n " . "idPrintful: " . $idPrintful . " },]";
+    //echo "conexion: [ { idWoocommerce: " . $idWoocommerce ." /n " . "idPrintful: " . $idPrintful . " },]";
     $path = dirname(__FILE__) . '/productos1.json';
     $agent = $_SERVER['HTTP_USER_AGENT'];
     $url="plantilla.envidoo.es/wp-content/plugins/PrintfulApiPlugin/productos1.json";

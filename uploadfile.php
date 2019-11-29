@@ -69,17 +69,17 @@ if (isset($_POST['but_submit'])) {
             </tr>
             <tr>
                 <td>
-        <input type="radio" class="sr-only" name="productos" id="poster" value="poster"/>
-                    <label for="poster"><img src="../wp-content/plugins/PrintfulApiPlugin/img/poster.jpg" alt="poster" /></label>
-                    </td>
-                    <td>
-        <input type="radio" class="sr-only" name="productos" id="lienzo"value="lienzo" />
-                    <label for="lienzo"><img src="../wp-content/plugins/PrintfulApiPlugin/img/lienzo.jpg" alt="lienzo" /></label>
-                    </td>
-                    <td>
-        <input type="radio" class="sr-only" name="productos" id="camiseta" value="camiseta"/>
-                    <label for="camiseta"><img src="../wp-content/plugins/PrintfulApiPlugin/img/camisetas.jpg" alt="camisetas" /></label>
-                    </td>
+                    <input type="radio" class="sr-only" name="productos" id="poster" value="poster"/>
+                    <label for="poster"><img id="tipo_poster" src="../wp-content/plugins/PrintfulApiPlugin/img/poster.jpg" alt="poster" /></label>
+                </td>
+                <td>
+                    <input type="radio" class="sr-only" name="productos" id="lienzo"value="lienzo" />
+                    <label for="lienzo"><img id="tipo_lienzo" src="../wp-content/plugins/PrintfulApiPlugin/img/lienzo.jpg" alt="lienzo" /></label>
+                </td>
+                <td>
+                    <input type="radio" class="sr-only" name="productos" id="camiseta" value="camiseta"/>
+                    <label for="camiseta"><img id="tipo_camiseta" src="../wp-content/plugins/PrintfulApiPlugin/img/camisetas.jpg" alt="camisetas" /></label>
+                </td>
         </td>
         </tr>
         </table>
