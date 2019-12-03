@@ -1,12 +1,7 @@
 <?php
 include 'printful.php';
 include 'minCost.php';
-/*if(isset($_POST['value'])) {  
-    $aid = $_POST['value'];
-    echo $aid;
-} else {
-    echo 'fail';    
-}*/
+include 'guardarImagenData.php';
 
 // Upload file
 if (isset($_POST['but_submit'])) {
@@ -20,37 +15,35 @@ if (isset($_POST['but_submit'])) {
         $size_lienzo = $_POST['lienzos'];
         $arr_lienzo = explode(':', $size_lienzo);
         $upload_overrides = array('test_form' => false);
-        
-        
-        
+
         $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
-        
 
         $imageurl = "";
         if ($movefile && !isset($movefile['error'])) {
             $imageurl = $movefile['url'];
             //echo "<img width='40px' style='text-align:left;' src=$imageurl></img>";
-            
-            if($tipo_producto == "poster") {
-                $id = (int)$arr_poster[1];
+
+            if ($tipo_producto == "poster") {
+                $id = (int) $arr_poster[1];
                 $size = $arr_poster[0];
                 $size_image = getimagesize($imageurl);
                 echo crearProducto($imageurl, $nombre_producto, $precio_venta, $id, $size);
-                echo findPrintfileId('268', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta);
+                echo findPrintfileId('268', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, getImageWidth(), getImageHeight(), getImageLeft(), getImageTop());
             }
 
-            if($tipo_producto == "lienzo") {
-                $id = (int)$arr_lienzo[1];
+            if ($tipo_producto == "lienzo") {
+                $id = (int) $arr_lienzo[1];
                 $size = $arr_lienzo[0];
                 $size_image = getimagesize($imageurl);
                 echo crearProducto($imageurl, $nombre_producto, $precio_venta, $id, $size);
-                echo findPrintfileId('3', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta);
+                echo findPrintfileId('3', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, getImageWidth(), getImageHeight(), getImageLeft(), getImageTop());
             }
         } else {
             echo $movefile['error'];
         }
     }
 }
+
 ?>
 <!-- Form -->
 <form method='post' action='' name='myform' id='myform' enctype='multipart/form-data'>
@@ -142,13 +135,13 @@ if (isset($_POST['but_submit'])) {
             <label for="minimo">Precio de Coste Art Hackers: </label>
             <input type="text" value="" id="minimo" name="minimo" readonly>
             <!---<label name="porcentaje_producto">10%</label>--->
-        </td> 
+        </td>
     </tr>
     <tr>
         <td>
             <label for="precio_venta">Precio de Venta: </label>
             <input type="decimal" value="" id="precio_venta" name="precio_venta">
-        </td> 
+        </td>
     </tr>
     <tr>
         <td><input type='file' name='file' id='file'></td>
@@ -158,7 +151,7 @@ if (isset($_POST['but_submit'])) {
         <td><div id="canvas"></div></td>
     </tr>
     <tr>
-      <td><input type='submit' name='but_submit' class="button button-primary" value='Previsualizar'></td>
+      <td><input type='submit' name='but_submit' class="button button-primary" value='Previsualizar' onclick="guardarNuevaImagen()"></td>
     </tr>
   </table>
 

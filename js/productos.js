@@ -97,8 +97,8 @@ function filePreview(input) {
             //console.log("offsetY", offsetY);
             img = new Image();
             img.onload = function () {
-                imageWidth = img.width;
-                imageHeight = img.height;
+                imageWidth = img.width/4;
+                imageHeight = img.height/4;
                 imageRight = imageX + imageWidth;
                 imageBottom = imageY + imageHeight;
                 draw(true, false);
@@ -196,6 +196,10 @@ function handleMouseUp(e) {
     draggingResizer = -1;
     draggingImage = false;
     draw(true, false);
+    /* console.log("new image width:", imageWidth);
+    console.log("new image height:", imageHeight);
+    console.log("new imageX:", imageX);
+    console.log("new imageY:", imageY); */
 }
 
 function handleMouseOut(e) {
@@ -298,6 +302,8 @@ jQuery(".posters").click(function () {
     d.type = "text/javascript";
     document.body.appendChild(d);
     jQuery("#posterSelected").val(x);
+
+    //Convertir el tamaño del poster a px
     var producto_split = x.split(":");
     var producto_size = producto_split[0].split("x");
     var producto_width = parseInt(producto_size[0]);
@@ -327,6 +333,8 @@ jQuery(".lienzos").click(function () {
     d.type = "text/javascript";
     document.body.appendChild(d);
     jQuery("#lienzoSelected").val(x);
+
+    //Convertir el tamaño del lienzo a px
     var producto_split = x.split(":");
     var producto_size = producto_split[0].split("x");
     var producto_width = parseInt(producto_size[0]);
@@ -346,6 +354,7 @@ jQuery(".lienzos").click(function () {
     jQuery('#canvas').append(newCanvas);
 });
 
+//Registrar los eventos del ratón para utilizarlos dentro del canvas
 function registermouseEvent() {
     jQuery("#myCanvas").mousedown(function (e) {
         handleMouseDown(e);
@@ -359,4 +368,20 @@ function registermouseEvent() {
     jQuery("#myCanvas").mouseout(function (e) {
         handleMouseOut(e);
     });
+}
+
+function guardarNuevaImagen() {
+    /* jQuery.ajax({
+        type: "GET",
+        url: myScript.pluginsUrl + "guardarImagenData.php",
+        data: { image_height: imageHeight, image_width: imageWidth, image_top: imageY, image_left: imageX },
+        success: function (html) {
+            //alert(html);
+        }
+    }); */
+
+    d = document.createElement("script");
+    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth;
+    d.type = "text/javascript";
+    document.body.appendChild(d);
 }

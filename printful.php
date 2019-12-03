@@ -42,7 +42,7 @@ function crearProducto($url, $nombre_producto, $precio, $id, $size)
     }
 }
 
-function findPrintfileId($idProducto, $variantId, $image_size, $image_url, $nombre, $product_size, $precio) {
+function findPrintfileId($idProducto, $variantId, $image_size, $image_url, $nombre, $product_size, $precio, $imagewidth, $imageheight, $imageleft, $imagetop) {
     $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
     $pf = new PrintfulApiClient($apiKey);
     $printfiles = $pf->get('mockup-generator/printfiles/' . $idProducto);
@@ -62,7 +62,7 @@ function findPrintfileId($idProducto, $variantId, $image_size, $image_url, $nomb
                                 //Obtener el tamaño de la imagen y llamar al método para obtener el tamaño del lienzo
                                 $width  = $image_size[0];
                                 $height = $image_size[1];
-                                findAreaWidthHeight($printfile_id, $idProducto, $variantId, $width, $height, $image_url, $nombre, $product_size, $precio);
+                                findAreaWidthHeight($printfile_id, $idProducto, $variantId, $image_url, $nombre, $product_size, $precio, $imagewidth, $imageheight, $imageleft, $imagetop);
                             }
                             $isVariant = false;
                         }
@@ -72,7 +72,7 @@ function findPrintfileId($idProducto, $variantId, $image_size, $image_url, $nomb
     }
 }
 
-function findAreaWidthHeight($printfileid, $id, $variant_id, $imageWidth, $imageHeight, $imageUrl, $nombreProd , $sizeProd, $precioProd) {
+function findAreaWidthHeight($printfileid, $id, $variant_id, $imageUrl, $nombreProd , $sizeProd, $precioProd, $imageWidth, $imageHeight, $imageLeft, $imageTop) {
     $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
     $pf = new PrintfulApiClient($apiKey);
     $printfiles = $pf->get('mockup-generator/printfiles/' . $id);
@@ -103,16 +103,16 @@ function findAreaWidthHeight($printfileid, $id, $variant_id, $imageWidth, $image
                 }
             }
 
-            generateMockup($id, $variant_id, $area_width, $area_height, $imageWidth, $imageHeight, $imageUrl, $nombreProd , $sizeProd, $precioProd);
+            generateMockup($id, $variant_id, $area_width, $area_height, $imageUrl, $nombreProd , $sizeProd, $precioProd, $imageWidth, $imageHeight, $imageLeft, $imageTop);
         }
     }
 }
 
-function generateMockup($id_product, $variant_id, $area_width, $area_height, $image_width, $image_height, $image_url, $nombreProducto , $sizeProducto , $precioProducto ) {
+function generateMockup($id_product, $variant_id, $area_width, $area_height, $image_url, $nombreProducto , $sizeProducto , $precioProducto, $image_width, $image_height, $image_left, $image_top) {
     $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
     $pf = new PrintfulApiClient($apiKey);
-    $left = ((int)$area_width/2) - ((int)$image_width/2);
-    $top = ((int)$area_height/2) - ((int)$image_height/2);
+    //$left = ((int)$area_width/2) - ((int)$image_width/2);
+    //$top = ((int)$area_height/2) - ((int)$image_height/2);
     $images = [];
      // Create new product in Printful
      $mockup = array(
@@ -124,10 +124,10 @@ function generateMockup($id_product, $variant_id, $area_width, $area_height, $im
             'position' => array(
                 'area_width' => $area_width,
                 'area_height' => $area_height,
-                'width' => $image_width,
-                'height' => $image_height,
-                'top' => $top,
-                'left' => $left
+                'width' => ((int)$image_width),
+                'height' => ((int)$image_height),
+                'top' => ((int)$image_top),
+                'left' => ((int)$image_left)
             )
         )],
     );
