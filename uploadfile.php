@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'printful.php';
 include 'minCost.php';
 include 'guardarImagenData.php';
@@ -27,16 +28,25 @@ if (isset($_POST['but_submit'])) {
                 $id = (int) $arr_poster[1];
                 $size = $arr_poster[0];
                 $size_image = getimagesize($imageurl);
+                $image_width = ((int)getImageWidth()*4);
+                $image_height = ((int)getImageHeight()*4);
+                $left = ((int)getImageLeft()*4);
+                $top = ((int)getImageTop()*4);
+
                 echo crearProducto($imageurl, $nombre_producto, $precio_venta, $id, $size);
-                echo findPrintfileId('268', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, getImageWidth(), getImageHeight(), getImageLeft(), getImageTop());
+                echo findPrintfileId('268', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, $image_width, $image_height, $left, $top);
             }
 
             if ($tipo_producto == "lienzo") {
                 $id = (int) $arr_lienzo[1];
                 $size = $arr_lienzo[0];
                 $size_image = getimagesize($imageurl);
+                $image_width = ((int)getImageWidth()*4);
+                $image_height = ((int)getImageHeight()*4);
+                $left = ((int)getImageLeft()*12);
+                $top = ((int)getImageTop()*12);
                 echo crearProducto($imageurl, $nombre_producto, $precio_venta, $id, $size);
-                echo findPrintfileId('3', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, getImageWidth(), getImageHeight(), getImageLeft(), getImageTop());
+                echo findPrintfileId('3', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, $image_width, $image_height, $left, $top);
             }
         } else {
             echo $movefile['error'];

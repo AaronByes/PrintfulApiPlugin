@@ -1,31 +1,38 @@
 <?php
-if (isset($_GET['width'])) {
-    $image = $_GET['width'];
-    echo "alert(\"" . @$image . "\");";
+session_start();
+if (isset($_GET['width']) && isset($_GET['height']) && isset($_GET['left']) && isset($_GET['top'])) {
+    $_SESSION["imageWidth"] = $_GET['width'];
+    $_SESSION["imageHeight"] = $_GET['height'];
+    $_SESSION["imageLeft"] = $_GET['left'];
+    $_SESSION["imageTop"] = $_GET['top'];
+    $width = $_GET['width'];
+    $height = $_GET['height'];
+    $left = $_GET['left'];
+    $top = $_GET['top'];
+    //echo "alert(\"" . @$width . " - " . @$height . " - " . @$left . " - " . @$top . "\");";
 } else {
-    echo "fail";
+    //echo "fail";
 }
 
 function getImageWidth()
 {
-    $imageWidth = '149';
-    return $imageWidth;
+    return $_SESSION["imageWidth"];
 }
 
 function getImageHeight()
 {
     $imageHeight = '60';
-    return $imageHeight;
+    return $_SESSION["imageHeight"];
 }
 
 function getImageLeft()
 {
     $imageLeft = '79';
-    return $imageLeft;
+    return $_SESSION["imageLeft"];
 }
 
 function getImageTop()
 {
     $imageTop = '82';
-    return $imageTop;
+    return $_SESSION["imageTop"];
 }

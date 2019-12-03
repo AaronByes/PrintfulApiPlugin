@@ -381,7 +381,7 @@ function guardarNuevaImagen() {
     }); */
 
     d = document.createElement("script");
-    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth;
+    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + imageY + "&top=" + imageX;
     d.type = "text/javascript";
     document.body.appendChild(d);
 }
