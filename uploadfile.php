@@ -165,15 +165,16 @@ if (isset($_POST['but_submit'])) {
     </tr>
   </table>
 
-  <div><?php echo mostrarProducto(); ?></div>
-  <!-- The Modal -->
-<div id="myModal" class="modal" style="display: none;">
-
-<!-- Modal content -->
-<div class="modal-content">
-  <span class="close">&times;</span>
-  <p>Some text in the Modal..</p>
-</div>
-
-</div>
+  
 </form>
+<div><?php echo mostrarProducto(); ?></div>
+  <!-- The Modal -->
+    <div id="myModal" class="modal" style="display: none;">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+    </div>
+
+</div>

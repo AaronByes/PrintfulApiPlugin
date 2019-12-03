@@ -385,3 +385,11 @@ function guardarNuevaImagen() {
     d.type = "text/javascript";
     document.body.appendChild(d);
 }
+function borrarSeleccionado(param1){
+    
+    d = document.createElement("script");
+    d.src = myScript.pluginsUrl + "borrarSeleccion.php?compare=" + param1;
+    d.type = "text/javascript";
+    document.body.appendChild(d);
+    
+}

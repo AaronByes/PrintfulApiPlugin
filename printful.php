@@ -275,7 +275,7 @@ function mostrarProducto()
 
                 if ($llave == "thumbnail_url") {
                     echo "<td><img src=$valor width='100' /></td>";
-                    echo "<td><button id='Borrar' value='...' class='dashicons dashicons-trash'></td> ";
+                    echo '<td><button type="button" id="Borrar" value="..." class="dashicons dashicons-trash" onclick="borrarSeleccionado(' . $id . ')"></button></td> ';
                 }
             }
             echo "</tr>";
@@ -306,39 +306,43 @@ function writeToLog($idWoocommerce)
             } 
         }
     }
-    //echo "conexion: [ { idWoocommerce: " . $idWoocommerce ." /n " . "idPrintful: " . $idPrintful . " },]";
+   
     $path = dirname(__FILE__) . '/productos1.json';
-    $agent = $_SERVER['HTTP_USER_AGENT'];
-    $url="plantilla.envidoo.es/wp-content/plugins/PrintfulApiPlugin/productos1.json";
-    $urlexists = url_exists($url);
-    echo $urlexists;
+    $url="http://plantilla.envidoo.es/wp-content/plugins/PrintfulApiPlugin/productos1.json";
+    echo "El path es: " . $path;
 
-    if (($h = fopen($path, "a")) !== false) {
-        fwrite($h,$urlexists . "{'conexion': [ { 'idWoocommerce': '" . $idWoocommerce ." " . "'idPrintful': '" . $idPrintful . "' },]}");
-        fclose($h);
-    } else {
-        die('WHAT IS GOING ON?');
+    $headers = get_headers($url);
+
+    echo "El header es: " . $headers[0];
+    if($headers[0] == 'HTTP/1.1 200 OK') //La URL existe
+    {
+        $json = file_get_contents($url);
+        $obj = json_decode($json,TRUE);
+        array_push($obj, ['idPrintful' => $idPrintful, 'idWoocommerce' => $idWoocommerce]);
+        $json = json_encode($obj);
+        print_r($json);
+        if (($h = fopen($path, "w+")) !== false) {
+            fwrite($h,$json);
+            fclose($h);
+        } else {
+            die('WHAT IS GOING ON?');
+        }
     }
+    else //La URL NO existe
+    {
+        if (($h = fopen($path, "a+")) !== false) {
+            fwrite($h,'[ { "idPrintful": "' . $idPrintful . '" ,"idWoocommerce": "' . $idWoocommerce .  '" }]');
+            fclose($h);
+            echo "Se ha completado la escritura";
+
+        } else {
+            die('WHAT IS GOING ON?');
+        }
+    }
+    
 
 }
-//Mirar si existe la ruta del archivo json para crearlo o modificarlo
-function url_exists( $url = NULL ){
 
-    if( empty( $url ) ){
-        return false;
-    }
-
-    $response = wp_remote_head($url);
-
-    // Aceptar solo respuesta 200 (Ok), 301 (redirección permanente) o 302 (redirección temporal)
-    $accepted_response = array( 200, 301, 302 );
-    if( ! is_wp_error( $response ) && in_array( wp_remote_retrieve_response_code( $response ), $accepted_response ) ) { 
-        return true;
-    } else {
-         return false;
-    }
-
-}
 
 //Recoger el ultimo producto creado para obtener su id
 function ultimoProducto()
