@@ -331,7 +331,7 @@ function writeToLog($idWoocommerce)
     else //La URL NO existe
     {
         if (($h = fopen($path, "a+")) !== false) {
-            fwrite($h,'[ { "idPrintful": "' . $idPrintful . '" ,"idWoocommerce": "' . $idWoocommerce .  '" }]');
+            fwrite($h,'[ { "idPrintful": "' . $idPrintful . '" ,"idWoocommerce": ' . $idWoocommerce .  '}]');
             fclose($h);
             echo "Se ha completado la escritura";
 
