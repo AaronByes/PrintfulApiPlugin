@@ -97,8 +97,8 @@ function filePreview(input) {
             //console.log("offsetY", offsetY);
             img = new Image();
             img.onload = function () {
-                imageWidth = img.width/4;
-                imageHeight = img.height/4;
+                imageWidth = img.width / 4;
+                imageHeight = img.height / 4;
                 imageRight = imageX + imageWidth;
                 imageBottom = imageY + imageHeight;
                 draw(true, false);
@@ -308,8 +308,8 @@ jQuery(".posters").click(function () {
     var producto_size = producto_split[0].split("x");
     var producto_width = parseInt(producto_size[0]);
     var producto_height = parseInt(producto_size[1]);
-    var width_pixels = (producto_width*37.79)/4;
-    var height_pixels = (producto_height*37.79)/4;
+    var width_pixels = (producto_width * 37.79) / 4;
+    var height_pixels = (producto_height * 37.79) / 4;
 
     //Crear canvas con el tamaño del lienzo al seleccionarlo
     jQuery('#canvas').html('');
@@ -321,7 +321,10 @@ jQuery(".posters").click(function () {
         height: height_pixels
     });
     jQuery('#canvas').append(newCanvas);
+    jQuery('#posicion_canvas').show();
+    jQuery('#label_orientacion').show();
 });
+
 jQuery(".lienzos").click(function () {
     var x = jQuery(this).attr('value');
     console.log(x);
@@ -339,8 +342,8 @@ jQuery(".lienzos").click(function () {
     var producto_size = producto_split[0].split("x");
     var producto_width = parseInt(producto_size[0]);
     var producto_height = parseInt(producto_size[1]);
-    var width_pixels = (producto_width*300)/12;
-    var height_pixels = (producto_height*300)/12;
+    var width_pixels = (producto_width * 300) / 12;
+    var height_pixels = (producto_height * 300) / 12;
 
     //Crear canvas con el tamaño del lienzo al seleccionarlo
     jQuery('#canvas').html('');
@@ -352,6 +355,8 @@ jQuery(".lienzos").click(function () {
         height: height_pixels
     });
     jQuery('#canvas').append(newCanvas);
+    jQuery('#posicion_canvas').show();
+    jQuery('#label_orientacion').show();
 });
 
 //Registrar los eventos del ratón para utilizarlos dentro del canvas
@@ -370,26 +375,116 @@ function registermouseEvent() {
     });
 }
 
-function guardarNuevaImagen() {
-    /* jQuery.ajax({
-        type: "GET",
-        url: myScript.pluginsUrl + "guardarImagenData.php",
-        data: { image_height: imageHeight, image_width: imageWidth, image_top: imageY, image_left: imageX },
-        success: function (html) {
-            //alert(html);
-        }
-    }); */
+function checkOrientacion() {
+    var selected = jQuery('#posicion_canvas :selected').text();
+    var poster = jQuery('.posters.active').attr('value');
+    var lienzo = jQuery('.lienzos.active').attr('value');
+    var tipo_producto = jQuery("input[name='productos']:checked").val();
 
+    if (tipo_producto == "poster") {
+        //Convertir el tamaño del lienzo a px
+        var producto_split = poster.split(":");
+        var producto_size = producto_split[0].split("x");
+        var producto_width = parseInt(producto_size[0]);
+        var producto_height = parseInt(producto_size[1]);
+        var width_pixels = (producto_width * 37.79) / 4;
+        var height_pixels = (producto_height * 37.79) / 4;
+        console.log("width", width_pixels);
+        console.log("height", height_pixels);
+
+        if (selected == 'Horizontal') {
+            //Crear canvas con el tamaño del lienzo al seleccionarlo
+            jQuery('#canvas').html('');
+            var newCanvas = jQuery('<canvas/>', {
+                'class': 'canvasProducto',
+                id: 'myCanvas'
+            }).prop({
+                width: height_pixels,
+                height: width_pixels
+            });
+            jQuery('#canvas').append(newCanvas);
+        }
+
+        if (selected == 'Vertical') {
+            //Crear canvas con el tamaño del lienzo al seleccionarlo
+            jQuery('#canvas').html('');
+            var newCanvas = jQuery('<canvas/>', {
+                'class': 'canvasProducto',
+                id: 'myCanvas'
+            }).prop({
+                width: width_pixels,
+                height: height_pixels
+            });
+            jQuery('#canvas').append(newCanvas);
+        }
+    }
+
+    if (tipo_producto == "lienzo") {
+        //Convertir el tamaño del lienzo a px
+        var producto_split = lienzo.split(":");
+        var producto_size = producto_split[0].split("x");
+        var producto_width = parseInt(producto_size[0]);
+        var producto_height = parseInt(producto_size[1]);
+        var width_pixels = (producto_width * 300) / 12;
+        var height_pixels = (producto_height * 300) / 12;
+        console.log("width", width_pixels);
+        console.log("height", height_pixels);
+
+        if (selected == 'Horizontal') {
+            //Crear canvas con el tamaño del lienzo al seleccionarlo
+            jQuery('#canvas').html('');
+            var newCanvas = jQuery('<canvas/>', {
+                'class': 'canvasProducto',
+                id: 'myCanvas'
+            }).prop({
+                width: height_pixels,
+                height: width_pixels
+            });
+            jQuery('#canvas').append(newCanvas);
+        }
+
+        if (selected == 'Vertical') {
+            //Crear canvas con el tamaño del lienzo al seleccionarlo
+            jQuery('#canvas').html('');
+            var newCanvas = jQuery('<canvas/>', {
+                'class': 'canvasProducto',
+                id: 'myCanvas'
+            }).prop({
+                width: width_pixels,
+                height: height_pixels
+            });
+            jQuery('#canvas').append(newCanvas);
+        }
+    }
+}
+
+function guardarNuevaImagen() {
+    console.log("left", imageX, "top", imageY);
     d = document.createElement("script");
-    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + imageY + "&top=" + imageX;
+    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + imageX + "&top=" + imageY;
     d.type = "text/javascript";
     document.body.appendChild(d);
 }
-function borrarSeleccionado(param1){
-    
-    d = document.createElement("script");
+
+function borrarSeleccionado(param1) {
+    /* d = document.createElement("script");
     d.src = myScript.pluginsUrl + "borrarSeleccion.php?compare=" + param1;
     d.type = "text/javascript";
-    document.body.appendChild(d);
-    
+    document.body.appendChild(d); */
+
+    jQuery.ajax({
+        method: 'POST',
+        url: my_ajax_url,
+        data: {
+            action: 'my_action', // "wp_ajax_*" action hook
+            compare: param1,
+        },
+    })
+    .done( function( response ) {
+        //alert( response );
+        location.reload();
+    })
+    .fail( function() {
+        alert( "error" );
+    })
 }

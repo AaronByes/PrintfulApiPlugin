@@ -240,7 +240,7 @@ function mostrarProducto()
             foreach ($value as $llave => $valor) {
                 if ($llave == "external_id") {
                     $variantes = $pf->get("store/products/@" . $valor);
-
+                    $id = "'".$valor."'";
                     //Obtener el precio del producto
                     foreach ($variantes as $variant_key => $variant_value) {
                         if ($variant_key == "sync_variants") {

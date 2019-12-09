@@ -28,10 +28,10 @@ if (isset($_POST['but_submit'])) {
                 $id = (int) $arr_poster[1];
                 $size = $arr_poster[0];
                 $size_image = getimagesize($imageurl);
-                $image_width = ((int)getImageWidth()*4);
-                $image_height = ((int)getImageHeight()*4);
-                $left = ((int)getImageLeft()*4);
-                $top = ((int)getImageTop()*4);
+                $image_width = ((int) getImageWidth() * 4);
+                $image_height = ((int) getImageHeight() * 4);
+                $left = ((int) getImageLeft() * 4);
+                $top = ((int) getImageTop() * 4);
 
                 echo crearProducto($imageurl, $nombre_producto, $precio_venta, $id, $size);
                 echo findPrintfileId('268', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, $image_width, $image_height, $left, $top);
@@ -41,10 +41,10 @@ if (isset($_POST['but_submit'])) {
                 $id = (int) $arr_lienzo[1];
                 $size = $arr_lienzo[0];
                 $size_image = getimagesize($imageurl);
-                $image_width = ((int)getImageWidth()*4);
-                $image_height = ((int)getImageHeight()*4);
-                $left = ((int)getImageLeft()*12);
-                $top = ((int)getImageTop()*12);
+                $image_width = ((int) getImageWidth() * 4);
+                $image_height = ((int) getImageHeight() * 4);
+                $left = ((int) getImageLeft() * 12);
+                $top = ((int) getImageTop() * 12);
                 echo crearProducto($imageurl, $nombre_producto, $precio_venta, $id, $size);
                 echo findPrintfileId('3', $id, $size_image, $imageurl, $nombre_producto, $size, $precio_venta, $image_width, $image_height, $left, $top);
             }
@@ -158,6 +158,15 @@ if (isset($_POST['but_submit'])) {
         <td><div id="contenedor"><img  class="ui-widget-content" id="img-preview" width="300" height="300" style="display: none;"/></div></td>
     </tr>
     <tr>
+        <td>
+            <label for="posicion_canvas" id="label_orientacion" style="display: none;">Orientación: </label>
+            <select id="posicion_canvas" name="posicion_canvas" style="display: none;" onchange="checkOrientacion()">
+                <option value="Vertical" selected>Vertical</option>
+                <option value="Horizontal">Horizontal</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
         <td><div id="canvas"></div></td>
     </tr>
     <tr>
@@ -165,7 +174,7 @@ if (isset($_POST['but_submit'])) {
     </tr>
   </table>
 
-  
+
 </form>
 <div><?php echo mostrarProducto(); ?></div>
   <!-- The Modal -->
