@@ -309,18 +309,18 @@ function writeToLog($idWoocommerce)
    
     $path = dirname(__FILE__) . '/productos1.json';
     $url="http://plantilla.envidoo.es/wp-content/plugins/PrintfulApiPlugin/productos1.json";
-    echo "El path es: " . $path;
+    //echo "El path es: " . $path;
 
     $headers = get_headers($url);
 
-    echo "El header es: " . $headers[0];
+    //echo "El header es: " . $headers[0];
     if($headers[0] == 'HTTP/1.1 200 OK') //La URL existe
     {
         $json = file_get_contents($url);
         $obj = json_decode($json,TRUE);
         array_push($obj, ['idPrintful' => $idPrintful, 'idWoocommerce' => $idWoocommerce]);
         $json = json_encode($obj);
-        print_r($json);
+        //print_r($json);
         if (($h = fopen($path, "w+")) !== false) {
             fwrite($h,$json);
             fclose($h);
@@ -333,8 +333,7 @@ function writeToLog($idWoocommerce)
         if (($h = fopen($path, "a+")) !== false) {
             fwrite($h,'[ { "idPrintful": "' . $idPrintful . '" ,"idWoocommerce": ' . $idWoocommerce .  '}]');
             fclose($h);
-            echo "Se ha completado la escritura";
-
+            //echo "Se ha completado la escritura";
         } else {
             die('WHAT IS GOING ON?');
         }

@@ -281,14 +281,31 @@ function failed() {
 function borrarPost(param1, param2) {
     //alert(param1);
     //alert(param2);
-    jQuery.ajax({
+    /* jQuery.ajax({
         type: "GET",
         url: myScript.pluginsUrl + "borrarProducto.php",
         data: { woocommerce: param1, printful: param2 },
         success: function (html) {
             alert(html);
         }
-    });
+    }); */
+
+    jQuery.ajax({
+        method: 'POST',
+        url: my_ajax_url,
+        data: {
+            action: 'my_action_preview', // "wp_ajax_*" action hook
+            printful: param2,
+            woocommerce: param1,
+        },
+    })
+        .done(function (response) {
+            //alert( response );
+            location.reload();
+        })
+        .fail(function () {
+            alert("error");
+        })
 }
 
 jQuery(".posters").click(function () {
@@ -459,19 +476,16 @@ function checkOrientacion() {
 }
 
 function guardarNuevaImagen() {
-    console.log("left", imageX, "top", imageY);
+    var position_left = startX - imageX;
+    var position_top = startY - imageY;
+    console.log("left", position_left, "top", position_top);
     d = document.createElement("script");
-    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + imageX + "&top=" + imageY;
+    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + position_left + "&top=" + position_left;
     d.type = "text/javascript";
     document.body.appendChild(d);
 }
 
 function borrarSeleccionado(param1) {
-    /* d = document.createElement("script");
-    d.src = myScript.pluginsUrl + "borrarSeleccion.php?compare=" + param1;
-    d.type = "text/javascript";
-    document.body.appendChild(d); */
-
     jQuery.ajax({
         method: 'POST',
         url: my_ajax_url,
@@ -480,11 +494,11 @@ function borrarSeleccionado(param1) {
             compare: param1,
         },
     })
-    .done( function( response ) {
-        //alert( response );
-        location.reload();
-    })
-    .fail( function() {
-        alert( "error" );
-    })
+        .done(function (response) {
+            //alert( response );
+            location.reload();
+        })
+        .fail(function () {
+            alert("error");
+        })
 }
