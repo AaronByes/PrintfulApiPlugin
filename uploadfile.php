@@ -56,11 +56,13 @@ if (isset($_POST['but_submit'])) {
 
 ?>
 <!-- Form -->
-<form method='post' action='' name='myform' id='myform' enctype='multipart/form-data'>
+<form method='post' action='' name='myform' id='myform' enctype='multipart/form-data' onsubmit="return validateForm()">
   <table class="table-productos">
     <tr>
         <td>
-            <label for="nombre">Nombre del Producto: </label> <input type="text" id="nombre" name="nombre"></td>
+            <label for="nombre">Nombre del Producto: </label> <input type="text" id="nombre" name="nombre">
+            <span id="nombreErr" style="display: none; color: #ff0000;">El nombre del producto es oligatorio</span>
+            </td>
     </tr>
     <tr>
     <td>
@@ -143,19 +145,16 @@ if (isset($_POST['but_submit'])) {
     <tr>
         <td>
             <label for="minimo">Precio de Coste Art Hackers: </label>
-            <input type="text" value="" id="minimo" name="minimo" readonly>
+            <input type="text" id="minimo" name="minimo" readonly>
             <!---<label name="porcentaje_producto">10%</label>--->
         </td>
     </tr>
     <tr>
         <td>
             <label for="precio_venta">Precio de Venta: </label>
-            <input type="decimal" value="" id="precio_venta" name="precio_venta">
+            <input type="decimal" id="precio_venta" name="precio_venta">
+            <span id="precioErr" style="display: none; color: #ff0000;">El precio del producto es oligatorio y no puede ser menor que el precio de coste</span>
         </td>
-    </tr>
-    <tr>
-        <td><input type='file' name='file' id='file'></td>
-        <td><div id="contenedor"><img  class="ui-widget-content" id="img-preview" width="300" height="300" style="display: none;"/></div></td>
     </tr>
     <tr>
         <td>
@@ -167,15 +166,18 @@ if (isset($_POST['but_submit'])) {
         </td>
     </tr>
     <tr>
+        <td><input type='file' name='file' id='file'></td>
+        <td><div id="contenedor"><img  class="ui-widget-content" id="img-preview" width="300" height="300" style="display: none;"/></div></td>
+    </tr>
+    <tr>
         <td><div id="canvas"></div></td>
     </tr>
     <tr>
       <td><input type='submit' name='but_submit' class="button button-primary" value='Previsualizar' onclick="guardarNuevaImagen()"></td>
     </tr>
   </table>
-
-
 </form>
+
 <div><?php echo mostrarProducto(); ?></div>
   <!-- The Modal -->
     <div id="myModal" class="modal" style="display: none;">

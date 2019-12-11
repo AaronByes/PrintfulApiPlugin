@@ -61,6 +61,9 @@ jQuery("input[name='productos']").click(function () {
 
     if (Seleccion == 'camiseta') {
         jQuery("#tipo_camiseta").addClass('active');
+        jQuery("#lienzos").hide();
+        jQuery("#posters").hide();
+        jQuery("#minimo").val('');
         jQuery('#canvas').html('');
     }
 });
@@ -279,17 +282,6 @@ function failed() {
 
 //Enviar los id a PHP 
 function borrarPost(param1, param2) {
-    //alert(param1);
-    //alert(param2);
-    /* jQuery.ajax({
-        type: "GET",
-        url: myScript.pluginsUrl + "borrarProducto.php",
-        data: { woocommerce: param1, printful: param2 },
-        success: function (html) {
-            alert(html);
-        }
-    }); */
-
     jQuery.ajax({
         method: 'POST',
         url: my_ajax_url,
@@ -501,4 +493,58 @@ function borrarSeleccionado(param1) {
         .fail(function () {
             alert("error");
         })
+}
+
+//Método para validar los campos del formulario
+function validateForm() {
+    var nombre = document.forms["myform"]["nombre"].value;
+    var precio = document.forms["myform"]["precio_venta"].value;
+    var precioMin = document.forms["myform"]["minimo"].value;
+
+    //Comprobar si el nombre y el precio están vacíos
+    if (nombre == "" && precio == "") {
+        jQuery('#nombreErr').show();
+        jQuery('#precioErr').show();
+        jQuery("html, body").animate({scrollTop: 0}, 1000);
+        return false;
+    } else {
+        jQuery('#nombreErr').hide();
+        jQuery('#precioErr').hide();
+    }
+
+    //Comprobar si el nombre está vacio y si el precio es menor al precio de coste de Art Hackers
+    if (nombre == "" && precio < parseInt(precioMin)) {
+        jQuery('#nombreErr').show();
+        jQuery('#precioErr').show();
+        jQuery("html, body").animate({scrollTop: 0}, 1000);
+        return false;
+    } else {
+        jQuery('#nombreErr').hide();
+        jQuery('#precioErr').hide();
+    }
+
+    //Comprobar si el nombre está vacío
+    if (nombre == "") {
+        jQuery('#nombreErr').show();
+        jQuery("html, body").animate({scrollTop: 0}, 1000);
+        return false;
+    } else {
+        jQuery('#nombreErr').hide();
+    }
+
+    //Comprobar si el precio está vacío
+    if (precio == "") {
+        jQuery('#precioErr').show();
+        return false;
+    } else {
+        jQuery('#precioErr').hide();
+    }
+
+    //Comprobar si el precio de venta es menos que el precio de coste de Art Hackers
+    if (precio < parseInt(precioMin)) {
+        jQuery('#precioErr').show();
+        return false;
+    } else {
+        jQuery('#precioErr').hide();
+    }
 }
