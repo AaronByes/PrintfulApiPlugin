@@ -46,23 +46,27 @@ function my_action()
     {
         $json = file_get_contents($url);
         $obj = json_decode($json, true);
+
         foreach ($obj as $key => $valor) {
             foreach ($valor as $key_valor => $valor_valor) {
                 if ($siguiente == true) {
-                    //echo $valor_valor;
+                    //Eliminar el producto de woocommerce y eliminarlo del json
                     wp_delete_post($valor_valor, true);
+                    unset($obj[$key]);
+                    $json = json_encode($obj);
+                    file_put_contents($path,$json);
                 }
                 $siguiente = false;
 
                 if ($valor_valor == $printful) {
                     $siguiente = true;
-                    //echo $valor_valor;
                 }
             }
         }
+        
+        //Eliminar el producto de printful
+        $pf->delete('store/products/@' . $printful);
     }
-    $json = json_encode($obj);
-    $pf->delete('store/products/@' . $printful);
     wp_die();
 }
 
@@ -71,13 +75,13 @@ add_action('wp_ajax_my_action_preview', 'my_action_preview');
 //Eliminar producto del preview
 function my_action_preview()
 {
-  $woocommerce = isset($_POST['woocommerce']) ? $_POST['woocommerce'] : 'N/A';
-  $printful = isset($_POST['printful']) ? $_POST['printful'] : 'N/A';
-  $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
-  $pf = new PrintfulApiClient($apiKey);
-  $woocommerce = $_POST['woocommerce'];
-  $printful = $_POST['printful'];
-  $pf->delete('store/products/@' . $printful);
-  wp_delete_post($woocommerce, true);
-  wp_die();
+    $woocommerce = isset($_POST['woocommerce']) ? $_POST['woocommerce'] : 'N/A';
+    $printful = isset($_POST['printful']) ? $_POST['printful'] : 'N/A';
+    $apiKey = 'qw9ttqt6-z72u-qf80:ejz1-52lb33te3obg';
+    $pf = new PrintfulApiClient($apiKey);
+    $woocommerce = $_POST['woocommerce'];
+    $printful = $_POST['printful'];
+    $pf->delete('store/products/@' . $printful);
+    wp_delete_post($woocommerce, true);
+    wp_die();
 }

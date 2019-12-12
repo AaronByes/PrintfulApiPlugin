@@ -468,8 +468,8 @@ function checkOrientacion() {
 }
 
 function guardarNuevaImagen() {
-    var position_left = startX - imageX;
-    var position_top = startY - imageY;
+    var position_left = (parseInt(canvas.width) / 2) - (parseInt(imageWidth) / 2);
+    var position_top = (parseInt(canvas.height) / 2) - (parseInt(imageHeight) / 2);
     console.log("left", position_left, "top", position_top);
     d = document.createElement("script");
     d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + position_left + "&top=" + position_left;
