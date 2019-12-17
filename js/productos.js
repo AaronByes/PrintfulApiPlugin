@@ -472,7 +472,7 @@ function guardarNuevaImagen() {
     var position_top = (parseInt(canvas.height) / 2) - (parseInt(imageHeight) / 2);
     console.log("left", position_left, "top", position_top);
     d = document.createElement("script");
-    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + position_left + "&top=" + position_left;
+    d.src = myScript.pluginsUrl + "guardarImagenData.php?width=" + imageWidth + "&height=" + imageHeight + "&left=" + position_left + "&top=" + position_top;
     d.type = "text/javascript";
     document.body.appendChild(d);
 }

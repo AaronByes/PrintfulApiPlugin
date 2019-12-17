@@ -21,18 +21,15 @@ function getImageWidth()
 
 function getImageHeight()
 {
-    $imageHeight = '60';
     return $_SESSION["imageHeight"];
 }
 
 function getImageLeft()
 {
-    $imageLeft = '79';
     return $_SESSION["imageLeft"];
 }
 
 function getImageTop()
 {
-    $imageTop = '82';
     return $_SESSION["imageTop"];
 }
